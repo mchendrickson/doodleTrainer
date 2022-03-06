@@ -1,5 +1,5 @@
 # doodleTrainer
-ToontownRewritten Doodle Trainer V2
+ToontownRewritten Doodle Trainer V3
 
 by Adam Garcia
 
@@ -13,16 +13,8 @@ First, how long you would like to run the trainer, my reccomendation to avoid ba
 more than 8 hours of usage at a time. I find it best to use it overnight and in the morning to exit
 the game to avoid suspition.
 
-Second, how many tricks you have. For example if the toon you are using only had jump and speak as tricks
-you would put 2. What I have found from all my time playing is that Jump, Beg, and Speak are the best.
-For this I usually create a new toon and gift them the tricks that I want to train, then set the number
-of tricks to however many I have at the time.
+Second, what row "Pets" tab in on, this make it so you can use toons with phrases and unites. Note:
+if there in an event that there are 5 rows the promgram should still run fine.
 
-Last, what row the pets tab is on. This will tell the bot what level to start using to be able to
-click on the tricks. I recommend new toons for this as they are on row 2 and do not have any phrases or
-unites that can be miscliked. I have had phrases clicked by accident before.
-
-Things needed:
-  -there is a C++ dependency that is needed for this to run properly. I can't remember which, but when
-  you run it will say that you are missing someting, they you can do a google search, and download from
-  Microsofts website.
+Last, what tricks you want to use, enter the nuber of the trick you want followed by a space. These
+are based on having all tricks unlocked, so make sure you have all tricks or you may encounter issues.

@@ -16,5 +16,9 @@ the game to avoid suspition.
 Second, what row "Pets" tab in on, this make it so you can use toons with phrases and unites. Note:
 if there in an event that there are 5 rows the promgram should still run fine.
 
-Last, what tricks you want to use, enter the nuber of the trick you want followed by a space. These
+Third, what tricks you want to use, enter the nuber of the trick you want followed by a space. These
 are based on having all tricks unlocked, so make sure you have all tricks or you may encounter issues.
+
+Lastly, it is still possible to get a temp ban from using this, I would reccomend that if you do want
+to use this then you should make a new accound, and gift it the tricks you want to train. This would
+avoid recieving a ban as well as any issues that you might have with speedchat alignment.

@@ -106,6 +106,9 @@ def takeUserInput():
     trick_message = ""
     for i in range(len(tricks)):
         trick_message += f'{i + 1}: {tricks[i]}'
+        if i < len(tricks) - 1:
+            trick_message += '\n'
+    displayMessage(trick_message)
     print(end='>')
     selected = list(map(int, input().split(',')))
     displayMessage('How many hours (4-8 is recommended) would you like to run the trainer:')
@@ -120,7 +123,6 @@ def takeUserInput():
 
 def displayMessage(message):
     """Input a string and have it wrapped nicely"""
-    print('=========================================================================')
     print(message)
     print('=========================================================================')
 

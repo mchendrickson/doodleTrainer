@@ -96,7 +96,6 @@ def start():
     coordinates, tricks = calibrate()
     if not coordinates == None:
         start_time = time.time()
-        print(type(start_time))
 
         print('=========================================================================')
         print('Select the tricks you want to perform with commas seperating the numbers:')

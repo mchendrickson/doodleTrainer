@@ -6,7 +6,7 @@ This is a tool for using the speedchat ui in ToonTown to say tricks for your doo
 
 Must be on a Windows based operating system.
 
-To make your expirence as seemless as possible I recommend that you have Python and Git installed on your machine.
+To make your experience as seemless as possible I recommend that you have Python and Git installed on your machine.
 
 - [Python](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -21,19 +21,19 @@ Navigate to the directory.
 
 ```cd doodleTrainer```
 
-## Virtual Enviornment(Optional)
+## Virtual Environment(Optional)
 
 This is good practice, but optional.
 
-Create virtual enviornment.
+Create virtual Environment.
 
 ```python -m venv venv```
 
-Activate virtual enviornment.
+Activate virtual Environment.
 
 ```venv\Scripts\activate```
 
-After you are done using the script you can leave the Virtual Enviornment with this command.
+After you are done using the script you can leave the Virtual Environment with this command.
 
 ```deactivate```
 
@@ -49,7 +49,7 @@ The dependencies need to be downloaded for this to work properly.
 
 ## Best Practices
 
-I reccomend that you do all the following to have the best expireince with this tool.
+I recommend that you do all the following to have the best experience with this tool.
 
 - Only have 1 Toontown account running on the computer you are running the script on.
 - Run the tool for no more than 8 hours at a time.

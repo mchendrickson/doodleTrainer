@@ -7,12 +7,34 @@ import time
 import random
 import keyboard
 
+def getGameWindows():
+    """Tries to get Rewritten and CC windows"""
+    toontown_rewritten_win = pygetwindow.getWindowsWithTitle('Toontown Rewritten')
+    corporate_clash_win = pygetwindow.getWindowsWithTitle('Corporate Clash')
+
+    return toontown_rewritten_win, corporate_clash_win
+
 
 def initWindow():
     """Grabs and resizes the window of the game"""
-    win = pygetwindow.getWindowsWithTitle('Toontown Rewritten')[0]  # TODO: Add Corporate Clash functionality
-    win.resizeTo(800, 600)
-    win.moveTo(0, 0)
+
+    displayMessage('Finding Window')
+    
+    toontown_rewritten_win, corporate_clash_win = getGameWindows()
+
+    main_window = None
+    if not toontown_rewritten_win == []:
+        main_window = toontown_rewritten_win[0]
+    elif not corporate_clash_win == []:
+        main_window = corporate_clash_win[0]
+
+    if main_window is None:
+        return main_window
+
+    main_window.resizeTo(800, 600)
+    main_window.moveTo(0, 0)
+
+    return main_window
 
 
 def getCoordinates(screen, image):
@@ -40,20 +62,20 @@ def getCoordinates(screen, image):
 
 def calibrate():
     """Determines the coordinates of each of the tricks on the screen"""
-    displayMessage('Starting Calibration... please wait...')
+    displayMessage('Starting Calibration... Please Wait...')
     current_mouse_pos = pyautogui.position()
 
     pictures = {}
-    speedchat = cv2.imread('Image Data/speedchat.png')
-    pets = cv2.imread('Image Data/pets.png')
-    tricks = cv2.imread('Image Data/tricks.png')
-    pictures['backflip'] = cv2.imread('Image Data/backflip.png')
-    pictures['beg'] = cv2.imread('Image Data/beg.png')
-    pictures['dance'] = cv2.imread('Image Data/dance.png')
-    pictures['jump'] = cv2.imread('Image Data/jump.png')
-    pictures['play_dead'] = cv2.imread('Image Data/play_dead.png')
-    pictures['rollover'] = cv2.imread('Image Data/rollover.png')
-    pictures['speak'] = cv2.imread('Image Data/speak.png')
+    speedchat = cv2.imread('ImageData/speedchat.png')
+    pets = cv2.imread('ImageData/pets.png')
+    tricks = cv2.imread('ImageData/tricks.png')
+    pictures['backflip'] = cv2.imread('ImageData/backflip.png')
+    pictures['beg'] = cv2.imread('ImageData/beg.png')
+    pictures['dance'] = cv2.imread('ImageData/dance.png')
+    pictures['jump'] = cv2.imread('ImageData/jump.png')
+    pictures['play_dead'] = cv2.imread('ImageData/play_dead.png')
+    pictures['rollover'] = cv2.imread('ImageData/rollover.png')
+    pictures['speak'] = cv2.imread('ImageData/speak.png')
 
     coordinates = {'speedchat': getCoordinates(screen=np.array(ImageGrab.grab(bbox=(0, 0, 400, 400))), image=speedchat)}
     pyautogui.click(coordinates['speedchat'])
@@ -102,53 +124,71 @@ def hereBoy(coordinates):
 
 def takeUserInput():
     """Navigates the mouse to call the doodle back to us if it runs too far away"""
-    displayMessage('Select the tricks you want to perform with commas separating the numbers:')
+    displayMessage('Select the tricks you want to train with commas separating the numbers:')
     trick_message = ""
     for i in range(len(tricks)):
         trick_message += f'{i + 1}: {tricks[i]}'
         if i < len(tricks) - 1:
             trick_message += '\n'
+    print('0: All')
     displayMessage(trick_message)
     print(end='>')
-    selected = list(map(int, input().split(',')))
+    selected = input()
+    printBreak()
     displayMessage('How many hours (4-8 is recommended) would you like to run the trainer:')
     print(end='>')
     hours = float(input())
-    for i in range(len(selected)):
-        selected[i] -= 1
+    printBreak()
 
-    selected_tricks = [tricks[num] for num in selected]
+    selected_tricks = []
+    if selected == '0':
+        selected_tricks = tricks
+    else:
+        selected = list(map(int, input().split(',')))
+        for i in range(len(selected)):
+            selected[i] -= 1
+        selected_tricks = [tricks[num] for num in selected]
+
     return hours, selected_tricks
 
+def printBreak():
+    """Break Line for after inputs"""
+    print('=========================================================================')
 
 def displayMessage(message):
     """Input a string and have it wrapped nicely"""
     print(message)
-    print('=========================================================================')
+    printBreak()
 
 
 if __name__ == "__main__":
-    initWindow()
-    coordinates, tricks = calibrate()
+    print('=========================================================================')
+    mode = initWindow()
+    if mode is not None:
+        displayMessage(f'{mode.title} mode')
+        coordinates, tricks = calibrate()
 
-    if coordinates is not None:
-        start_time = time.time()
-        hours, selected_tricks = takeUserInput()
-        tricks_performed = 0
-        displayMessage('Starting training, you can press the escape key to cancel at any time')
-        while hours > (time.time() - start_time) / 3600:
-            if keyboard.is_pressed("ESC"):
-                break
+        if coordinates is not None:
+            start_time = time.time()
+            hours, selected_tricks = takeUserInput()
+            tricks_performed = 0
+            displayMessage('Starting training, hold esc for 1 cycle to stop')
+            while hours > (time.time() - start_time) / 3600:
+                if keyboard.is_pressed("ESC"):
+                    break
 
-            rand_variation = random.randint(0, 100)
-            if rand_variation > 82:
-                hereBoy(coordinates)
-                time.sleep(1 + (rand_variation * 2) / 100)
+                rand_variation = random.randint(0, 100)
+                if rand_variation > 88:
+                    hereBoy(coordinates)
+                    time.sleep(1 + (rand_variation * 2) / 100)
 
-            hours_message = f'Hours elapsed: {round((time.time() - start_time) / 3600, 2)}/{hours}'
-            tricks_message = f'Tricks attempted: {tricks_performed}'
-            displayMessage(hours_message + "\n" + tricks_message)
+                hours_message = f'Hours elapsed: {round((time.time() - start_time) / 3600, 2)}/{hours}'
+                tricks_message = f'Tricks attempted: {tricks_performed}'
+                displayMessage(hours_message + "\n" + tricks_message)
 
-            performTrick(coordinates, selected_tricks)
-            tricks_performed += 1
-            time.sleep(3.5 + random.randrange(0, 4))
+                performTrick(coordinates, selected_tricks)
+                tricks_performed += 1
+                time.sleep(4.5 + random.randrange(0, 4))
+            displayMessage('Training Completed')
+    else:
+        displayMessage('No Window Found, Aborting')

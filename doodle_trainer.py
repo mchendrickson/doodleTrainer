@@ -42,18 +42,17 @@ def getCoordinates(screen, image):
 
 def calibrate():
     """Determines the coordinates of each of the tricks on the screen"""
+    displayMessage('Enter the row number the "PETS" field is at')
+    pets_row = input()
     displayMessage('Starting Calibration... please wait...')
     current_mouse_pos = pyautogui.position()
 
-    trick_names = ('backflip', 'beg',
-                   'dance', 'jump',
-                   'play_dead', 'rollover',
-                   'speak')
+    trick_names = ('jump', 'play_dead', 'rollover', 'backflip', 'speak', 'beg', 'dance')
 
     speedchat = cv2.imread('speedchat.png')
 
     coordinates = {'speedchat': getCoordinates(screen=np.array(ImageGrab.grab(bbox=(0, 0, 400, 400))), image=speedchat)}
-    coordinates['pets'] = (coordinates['speedchat'][0] + 40, coordinates['speedchat'][1] + 35)
+    coordinates['pets'] = (coordinates['speedchat'][0] + 40, coordinates['speedchat'][1] + (18 * (int(pets_row) - 1)))
     coordinates['tricks'] = (coordinates['pets'][0] + 120, coordinates['pets'][1])
     coordinates['here_boy'] = [coordinates['tricks'][0], coordinates['tricks'][1] + 15]
 

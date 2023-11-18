@@ -18,6 +18,8 @@ Find the files in your downloads folder and extract the files.
 
 Open the new folder, [Shift + Right Click] on a blank space in the folder and open with PowerShell.
 
+You should see something like: ```C:\Users\user\Downloads\doodleTrainer``` and if so you are ready to move on.
+
 ## Virtual Environment(Optional)
 
 This is good practice, but optional.

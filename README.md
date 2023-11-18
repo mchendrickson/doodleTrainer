@@ -12,7 +12,7 @@ To make your experience as seemless as possible I recommend that you have Python
 
 ## Download Files via Releases Tab
 
--[Release v4.0](https://github.com/arcygarcy/doodleTrainer/releases/tag/v4.0)
+-[Release v4.1](https://github.com/arcygarcy/doodleTrainer/releases/tag/v4.1)
 
 Find the files in your downloads folder and extract the files.
 

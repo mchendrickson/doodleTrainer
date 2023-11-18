@@ -9,17 +9,14 @@ Must be on a Windows based operating system.
 To make your experience as seemless as possible I recommend that you have Python and Git installed on your machine.
 
 - [Python](https://www.python.org/downloads/)
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-## Clone the Repository
+## Download Files via Releases Tab
 
-Open a command prompt, on windows you can simply press the windows key on your keyboard and type powershell.
+-[Release v4.0](https://github.com/arcygarcy/doodleTrainer/releases/tag/v4.0)
 
-```git clone https://github.com/arcygarcy/doodleTrainer.git```
+Find the files in your downloads folder and extract the files.
 
-Navigate to the directory.
-
-```cd doodleTrainer```
+Open the new folder, [Shift + Right Click] on a blank space in the folder and open with PowerShell.
 
 ## Virtual Environment(Optional)
 

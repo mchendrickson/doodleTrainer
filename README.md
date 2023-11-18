@@ -4,8 +4,7 @@ This is a tool for using the speed chat UI in ToonTown to say tricks for your do
 
 ## Prerequisites
 
-Must be on a Windows-based operating system.
-Python is necessary for this to work.
+Must be on a Windows-based operating system. Python is necessary for this to work.
 
 - [Python](https://www.python.org/downloads/)
 
@@ -13,13 +12,10 @@ Python is necessary for this to work.
 
 [Release v4.0](https://github.com/arcygarcy/doodleTrainer/releases/tag/v4.0)
 
-Find the files in your downloads folder and extract the files.
-Open the new folder, [Shift + Right Click] on a blank space in the folder, and open with PowerShell.
-You should see something like: ```C:\Users\user\Downloads\doodleTrainer``` and if so you are ready to move on.
+Find the files in your downloads folder and extract the files. Open the new folder, [Shift + Right Click] on a blank space in the folder, and open with PowerShell. You should see something like ```C:\Users\user\Downloads\doodleTrainer``` and if so you are ready to move on.
 
 ## Virtual Environment(Optional)
 
-This is good practice, but optional.
 Install venv.
 
 ```pip install virtualenv```

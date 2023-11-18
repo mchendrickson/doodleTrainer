@@ -1,12 +1,12 @@
 # ToontownRewritten Doodle Trainer V4
 
-This is a tool for using the speedchat ui in ToonTown to say tricks for your doodle to perform. This was made for educational purposes and to get a better understanding of python and these libraries.
+This is a tool for using the speed chat UI in ToonTown to say tricks for your doodle to perform. This was made for educational purposes and to get a better understanding of Python and these libraries.
 
 ## Prerequisites
 
-Must be on a Windows based operating system.
+Must be on a Windows-based operating system.
 
-To make your experience as seemless as possible I recommend that you have Python and Git installed on your machine.
+Python is necessary for this to work.
 
 - [Python](https://www.python.org/downloads/)
 
@@ -16,7 +16,7 @@ To make your experience as seemless as possible I recommend that you have Python
 
 Find the files in your downloads folder and extract the files.
 
-Open the new folder, [Shift + Right Click] on a blank space in the folder and open with PowerShell.
+Open the new folder, [Shift + Right Click] on a blank space in the folder, and open with PowerShell.
 
 You should see something like: ```C:\Users\user\Downloads\doodleTrainer``` and if so you are ready to move on.
 
@@ -24,7 +24,7 @@ You should see something like: ```C:\Users\user\Downloads\doodleTrainer``` and i
 
 This is good practice, but optional.
 
-Create virtual Environment.
+Create a virtual Environment.
 
 ```python -m venv venv```
 

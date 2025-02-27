@@ -17,6 +17,9 @@ def initWindow():
     win.moveTo(0, 0)
 
 
+def clamp(n, smallest, largest): return max(smallest, min(n, largest))
+
+
 def getCoordinates(screen, image):
     """Gets the position of a specified image on the screen using cv2 to match it"""
     w, h = image.shape[:-1]
@@ -43,22 +46,24 @@ def getCoordinates(screen, image):
 def calibrate():
     """Determines the coordinates of each of the tricks on the screen"""
     displayMessage('Enter the row number the "PETS" field is at')
-    pets_row = input()
+    pets_row = int(input())
+    pets_row = clamp(pets_row, 1, 32) # Must be at least on row 1
+    displayMessage('Enter the number of tricks you have unlocked')
+    num_tricks = int(input())
+    num_tricks = clamp(num_tricks, 1, 7) # Must be at least 1 and less than or equal to 7
     displayMessage('Starting Calibration... please wait...')
     current_mouse_pos = pyautogui.position()
-
-    trick_names = ('jump', 'play_dead', 'rollover', 'backflip', 'speak', 'beg', 'dance')
 
     speedchat = cv2.imread('speedchat.png')
 
     coordinates = {'speedchat': getCoordinates(screen=np.array(ImageGrab.grab(bbox=(0, 0, 400, 400))), image=speedchat)}
-    coordinates['pets'] = (coordinates['speedchat'][0] + 40, coordinates['speedchat'][1] + (18 * (int(pets_row) - 1)))
+    coordinates['pets'] = (coordinates['speedchat'][0] + 40, coordinates['speedchat'][1] + (18 * (pets_row - 1)))
     coordinates['tricks'] = (coordinates['pets'][0] + 120, coordinates['pets'][1])
     coordinates['here_boy'] = [coordinates['tricks'][0], coordinates['tricks'][1] + 15]
 
     tricks = []
-    for i in range(len(trick_names)):
-        key = str(trick_names[i])
+    for i in range(num_tricks):
+        key = "trick_" + str(i)
         coordinates[key] = [coordinates['tricks'][0] + 50, coordinates['tricks'][1] + 18.5 * i]
         tricks.append(key)
 
@@ -94,26 +99,22 @@ def hereBoy(coordinates):
 
 def takeUserInput():
     """Navigates the mouse to call the doodle back to us if it runs too far away"""
-    displayMessage('Select the tricks you want to perform with commas separating the numbers:')
-    trick_message = ""
-    for i in range(len(tricks)):
-        trick_message += f'{i + 1}: {tricks[i]}'
-        if i < len(tricks) - 1:
-            trick_message += '\n'
-    displayMessage(trick_message)
+    displayMessage('Select the tricks you want to perform by entering the number the row the trick is on in the PETS subtab of the TRICKS tab.\nUse commas to separate each trick you want to perform or press 0 to train everything.')
     print(end='>')
     selected = list(map(int, input().split(',')))
+    displayMessage('Select the minimum time between each trick press in seconds. 1-4 seconds is generally recommended.')
+    print(end='>')
+    minimum_trick_time = int(input())
+    displayMessage('Select the maximum time between each trick press in seconds. 5-10 seconds is generally recommended.')
+    print(end='>')
+    maximum_trick_time = int(input())
     displayMessage('How many hours (4-8 is recommended) would you like to run the trainer:')
     print(end='>')
     hours = float(input())
     for i in range(len(selected)):
         selected[i] -= 1
-
-    for num in selected:
-        print(num)
-        print(tricks[num])
     selected_tricks = [tricks[num] for num in selected]
-    return hours, selected_tricks
+    return hours, selected_tricks, minimum_trick_time, maximum_trick_time
 
 
 def displayMessage(message):
@@ -137,7 +138,7 @@ if __name__ == "__main__":
 
     if coordinates is not None:
         start_time = time.time()
-        hours, selected_tricks = takeUserInput()
+        hours, selected_tricks, minimum_trick_time, maximum_trick_time = takeUserInput()
         tricks_performed = 0
         displayMessage('Starting training, you can press the escape key to cancel at any time')
         while hours > (time.time() - start_time) / 3600 and not stop:
@@ -152,4 +153,4 @@ if __name__ == "__main__":
 
             performTrick(coordinates, selected_tricks)
             tricks_performed += 1
-            time.sleep(3.5 + random.randrange(0, 4))
+            time.sleep(3.5 + random.randrange(minimum_trick_time, maximum_trick_time))

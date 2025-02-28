@@ -4,7 +4,7 @@ This is a tool for using the speed chat UI in ToonTown to say tricks for your do
 
 ## Prerequisites
 
-Must be on a Windows-based operating system. Python3 is necessary for this to work.
+Must be on a Windows-based operating system. Python3 is necessary for this to work. Python 3.11 was used to compile and test the program, but any Python version past this or the latest should work just fine. 
 
 - [Python](https://www.python.org/downloads/)
 

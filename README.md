@@ -21,3 +21,11 @@ I recommend that you do all the following to have the best experience with this 
 - Only have 1 Toontown account running on the computer you are running the script on.
 - Run the tool for no more than 6 hours at a time.
 - Stand on the edge of a roof at your toon estate, this will stop doodle from pushing you around.
+
+## Troubleshooting
+
+**It doesn't click the buttons accurately**
+Make sure you are using a resolution that has an aspect ratio of 16:9. Ideally, use 1920 x 1080p. Make sure any scaling or other Windows nonsense is turned off (set to default values or 100%) in your display settings.
+
+**It crashes immediately when I launch it**
+Make sure you have python installed. If this doesn't help, run it in a CMD and post the error message in the issues page

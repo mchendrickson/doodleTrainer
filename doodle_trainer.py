@@ -128,10 +128,10 @@ def takeUserInput():
     # Select minimum and maximum trick times
     displayMessage('Select the minimum time between each trick press in seconds. 6-8 seconds is generally recommended.')
     print(end='>')
-    minimum_trick_time = int(input())
+    minimum_trick_time = clamp(int(input()), 0, 999999999)
     displayMessage('Select the maximum time between each trick press in seconds. 10-12 seconds is generally recommended.')
     print(end='>')
-    maximum_trick_time = int(input())
+    maximum_trick_time = clamp(int(input()), minimum_trick_time, 999999999)
 
     # Select hours to run
     displayMessage('How many hours (under or at 6 is recommended) would you like to run the trainer:')

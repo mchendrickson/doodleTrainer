@@ -8,6 +8,7 @@ import random
 import keyboard
 import sys
 import os
+from art import *
 
 
 def resource_path(relative_path):
@@ -51,13 +52,17 @@ def getCoordinates(screen, image):
 
 def calibrate():
     """Determines the coordinates of each of the tricks on the screen"""
+    tprint("Doodle Trainer V5.0")
     displayMessage('Enter the row number the "PETS" field is at')
+    print(end='>')
     pets_row = int(input())
     pets_row = clamp(pets_row, 1, 32)  # Must be at least on row 1
     displayMessage('Enter the number of tricks you have unlocked')
+    print(end='>')
     num_tricks = int(input())
     num_tricks = clamp(num_tricks, 1, 7)  # Must be at least 1 and less than or equal to 7
     displayMessage('Starting Calibration... please wait...')
+    print(end='>')
     current_mouse_pos = pyautogui.position()
 
     speedchat = cv2.imread(resource_path('speedchat.png'))
@@ -152,6 +157,8 @@ def displayMessage(message):
 
 
 def on_escape():
+    tprint("Exiting...")
+    print("Thanks for using this program! Remember, I'm not responsible if you get banned :)")
     os._exit(0)
 
 

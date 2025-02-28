@@ -6,6 +6,15 @@ import pyautogui
 import time
 import random
 import keyboard
+import sys
+import os
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return str(os.path.join(base_path, relative_path))
+
 
 stop = False
 
@@ -54,7 +63,7 @@ def calibrate():
     displayMessage('Starting Calibration... please wait...')
     current_mouse_pos = pyautogui.position()
 
-    speedchat = cv2.imread('speedchat.png')
+    speedchat = cv2.imread(resource_path('speedchat.png'))
 
     coordinates = {'speedchat': getCoordinates(screen=np.array(ImageGrab.grab(bbox=(0, 0, 400, 400))), image=speedchat)}
     coordinates['pets'] = (coordinates['speedchat'][0] + 40, coordinates['speedchat'][1] + (18 * (pets_row - 1)))

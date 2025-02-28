@@ -16,9 +16,6 @@ def resource_path(relative_path):
     return str(os.path.join(base_path, relative_path))
 
 
-stop = False
-
-
 def initWindow():
     """Grabs and resizes the window of the game"""
     win = pygetwindow.getWindowsWithTitle('Toontown Rewritten')[0]
@@ -56,10 +53,10 @@ def calibrate():
     """Determines the coordinates of each of the tricks on the screen"""
     displayMessage('Enter the row number the "PETS" field is at')
     pets_row = int(input())
-    pets_row = clamp(pets_row, 1, 32) # Must be at least on row 1
+    pets_row = clamp(pets_row, 1, 32)  # Must be at least on row 1
     displayMessage('Enter the number of tricks you have unlocked')
     num_tricks = int(input())
-    num_tricks = clamp(num_tricks, 1, 7) # Must be at least 1 and less than or equal to 7
+    num_tricks = clamp(num_tricks, 1, 7)  # Must be at least 1 and less than or equal to 7
     displayMessage('Starting Calibration... please wait...')
     current_mouse_pos = pyautogui.position()
 
@@ -102,17 +99,20 @@ def performTrick(coordinates, selected_tricks):
     pyautogui.click(coordinates[selected_tricks[trick]])
 
 
-def hereBoy(coordinates):
+def here_boy(coordinates):
     """Navigates the mouse to call the doodle back to us if it runs too far away"""
     pyautogui.click(coordinates['speedchat'])
+    time.sleep(random.uniform(0.25, 1.25))
     pyautogui.moveTo(coordinates['pets'])
+    time.sleep(random.uniform(0.25, 1.25))
     pyautogui.click(coordinates['here_boy'])
 
 
 def takeUserInput():
     """Determine all the users criteria"""
     # Select number of tricks
-    displayMessage('Select the row numbers of the tricks you want to train. Use commas to separate each trick you want to perform or just enter 0 to train everything. (For example, typing "1,3,5" would train the first, third, and fifth tricks you have. Typing "4" would just train the fourth trick, etc...)')
+    displayMessage(
+        'Select the row numbers of the tricks you want to train. Use commas to separate each trick you want to perform or just enter 0 to train everything. (For example, typing "1,3,5" would train the first, third, and fifth tricks you have. Typing "4" would just train the fourth trick, etc...)')
     print(end='>')
     selected_input = input()
     if '0' in selected_input:
@@ -129,7 +129,8 @@ def takeUserInput():
     displayMessage('Select the minimum time between each trick press in seconds. 3-6 seconds is generally recommended.')
     print(end='>')
     minimum_trick_time = clamp(int(input()), 0, 999999999)
-    displayMessage('Select the maximum time between each trick press in seconds. 8-10 seconds is generally recommended.')
+    displayMessage(
+        'Select the maximum time between each trick press in seconds. 8-10 seconds is generally recommended.')
     print(end='>')
     maximum_trick_time = clamp(int(input()), minimum_trick_time, 999999999)
 
@@ -151,10 +152,7 @@ def displayMessage(message):
 
 
 def on_escape():
-    global stop
-    if not stop:
-        print("STOPPING TRAINER")
-        stop = True
+    os._exit(0)
 
 
 keyboard.add_hotkey('ESC', on_escape)
@@ -168,10 +166,10 @@ if __name__ == "__main__":
         hours, selected_tricks, minimum_trick_time, maximum_trick_time, here_boy_percent = takeUserInput()
         tricks_performed = 0
         displayMessage('Starting training, you can press the escape key to cancel at any time')
-        while hours > (time.time() - start_time) / 3600 and not stop:
+        while hours > (time.time() - start_time) / 3600:
             rand_variation = random.random()
             if rand_variation < here_boy_percent:
-                hereBoy(coordinates)
+                here_boy(coordinates)
                 time.sleep(random.uniform(minimum_trick_time, maximum_trick_time))
 
             hours_message = f'Hours elapsed: {round((time.time() - start_time) / 3600, 2)}/{hours}'

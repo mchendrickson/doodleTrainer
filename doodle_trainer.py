@@ -53,6 +53,7 @@ def getCoordinates(screen, image):
 def calibrate():
     """Determines the coordinates of each of the tricks on the screen"""
     tprint("Doodle Trainer V5.0")
+    print("Welcome to the doodle trainer!\nI'm not responsible if you get banned so use at your own risk :)\n\n")
     displayMessage('Enter the row number the "PETS" field is at')
     print(end='>')
     pets_row = int(input())
@@ -158,7 +159,6 @@ def displayMessage(message):
 
 def on_escape():
     tprint("Exiting...")
-    print("Thanks for using this program! Remember, I'm not responsible if you get banned :)")
     os._exit(0)
 
 

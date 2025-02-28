@@ -1,4 +1,4 @@
-# ToontownRewritten Doodle Trainer V5
+# Toontown Rewritten Doodle Trainer v5.0
 
 This is a tool for using the speed chat UI in ToonTown to say tricks for your doodle to perform. This was made for educational purposes only.
 

@@ -126,10 +126,10 @@ def takeUserInput():
     here_boy_percent = clamp(float(input()), 0.00, 0.99)
 
     # Select minimum and maximum trick times
-    displayMessage('Select the minimum time between each trick press in seconds. 6-8 seconds is generally recommended.')
+    displayMessage('Select the minimum time between each trick press in seconds. 3-6 seconds is generally recommended.')
     print(end='>')
     minimum_trick_time = clamp(int(input()), 0, 999999999)
-    displayMessage('Select the maximum time between each trick press in seconds. 10-12 seconds is generally recommended.')
+    displayMessage('Select the maximum time between each trick press in seconds. 8-10 seconds is generally recommended.')
     print(end='>')
     maximum_trick_time = clamp(int(input()), minimum_trick_time, 999999999)
 

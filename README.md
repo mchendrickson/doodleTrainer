@@ -25,7 +25,9 @@ I recommend that you do all the following to have the best experience with this 
 ## Troubleshooting
 
 **It doesn't click the buttons accurately**
+
 Make sure you are using a resolution that has an aspect ratio of 16:9. Ideally, use 1920 x 1080p. Make sure any scaling or other Windows nonsense is turned off (set to default values or 100%) in your display settings.
 
 **It crashes immediately when I launch it**
+
 Make sure you have python installed. If this doesn't help, run it in a CMD and post the error message in the issues page

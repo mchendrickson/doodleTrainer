@@ -112,7 +112,7 @@ def hereBoy(coordinates):
 def takeUserInput():
     """Determine all the users criteria"""
     # Select number of tricks
-    displayMessage('Select the tricks you want to perform by entering the number the row the trick is on in the PETS subtab of the TRICKS tab.\nUse commas to separate each trick you want to perform or enter 0 to train everything.')
+    displayMessage('Select the row numbers of the tricks you want to train. Use commas to separate each trick you want to perform or just enter 0 to train everything. (For example, typing "1,3,5" would train the first, third, and fifth tricks you have. Typing "4" would just train the fourth trick, etc...)')
     print(end='>')
     selected_input = input()
     if '0' in selected_input:

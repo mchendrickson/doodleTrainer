@@ -94,8 +94,11 @@ def performTrick(coordinates, selected_tricks):
     """Navigates the mouse to the specified trick via dropdowns and predetermined coordinates"""
     trick = random.randint(0, len(selected_tricks) - 1)
     pyautogui.click(coordinates['speedchat'])
+    time.sleep(random.uniform(0.25, 1.25))
     pyautogui.moveTo(coordinates['pets'])
+    time.sleep(random.uniform(0.25, 1.25))
     pyautogui.moveTo(coordinates['tricks'])
+    time.sleep(random.uniform(0.25, 1.25))
     pyautogui.click(coordinates[selected_tricks[trick]])
 
 
@@ -107,23 +110,38 @@ def hereBoy(coordinates):
 
 
 def takeUserInput():
-    """Navigates the mouse to call the doodle back to us if it runs too far away"""
-    displayMessage('Select the tricks you want to perform by entering the number the row the trick is on in the PETS subtab of the TRICKS tab.\nUse commas to separate each trick you want to perform or press 0 to train everything.')
+    """Determine all the users criteria"""
+    # Select number of tricks
+    displayMessage('Select the tricks you want to perform by entering the number the row the trick is on in the PETS subtab of the TRICKS tab.\nUse commas to separate each trick you want to perform or enter 0 to train everything.')
     print(end='>')
-    selected = list(map(int, input().split(',')))
-    displayMessage('Select the minimum time between each trick press in seconds. 1-4 seconds is generally recommended.')
+    selected_input = input()
+    if '0' in selected_input:
+        selected_input = ",".join(map(str, range(1, len(tricks) + 1)))
+    selected = list(map(int, selected_input.split(',')))
+
+    # Select percentage of "here boy!"
+    displayMessage(
+        "What percent of the time would you like other phrases to be mixed in like 'Here Boy!'? Type 0 to turn it off completely, type any decimal from 0.01 to 0.99 to determine the frequency otherwise. (0.05 is recommended)")
+    print(end='>')
+    here_boy_percent = clamp(float(input()), 0.00, 0.99)
+
+    # Select minimum and maximum trick times
+    displayMessage('Select the minimum time between each trick press in seconds. 6-8 seconds is generally recommended.')
     print(end='>')
     minimum_trick_time = int(input())
-    displayMessage('Select the maximum time between each trick press in seconds. 5-10 seconds is generally recommended.')
+    displayMessage('Select the maximum time between each trick press in seconds. 10-12 seconds is generally recommended.')
     print(end='>')
     maximum_trick_time = int(input())
-    displayMessage('How many hours (4-8 is recommended) would you like to run the trainer:')
+
+    # Select hours to run
+    displayMessage('How many hours (under or at 6 is recommended) would you like to run the trainer:')
     print(end='>')
     hours = float(input())
     for i in range(len(selected)):
         selected[i] -= 1
     selected_tricks = [tricks[num] for num in selected]
-    return hours, selected_tricks, minimum_trick_time, maximum_trick_time
+
+    return hours, selected_tricks, minimum_trick_time, maximum_trick_time, here_boy_percent
 
 
 def displayMessage(message):
@@ -147,14 +165,14 @@ if __name__ == "__main__":
 
     if coordinates is not None:
         start_time = time.time()
-        hours, selected_tricks, minimum_trick_time, maximum_trick_time = takeUserInput()
+        hours, selected_tricks, minimum_trick_time, maximum_trick_time, here_boy_percent = takeUserInput()
         tricks_performed = 0
         displayMessage('Starting training, you can press the escape key to cancel at any time')
         while hours > (time.time() - start_time) / 3600 and not stop:
-            rand_variation = random.randint(0, 100)
-            if rand_variation > 82:
+            rand_variation = random.random()
+            if rand_variation < here_boy_percent:
                 hereBoy(coordinates)
-                time.sleep(1 + (rand_variation * 2) / 100)
+                time.sleep(random.uniform(minimum_trick_time, maximum_trick_time))
 
             hours_message = f'Hours elapsed: {round((time.time() - start_time) / 3600, 2)}/{hours}'
             tricks_message = f'Tricks attempted: {tricks_performed}'
@@ -162,4 +180,4 @@ if __name__ == "__main__":
 
             performTrick(coordinates, selected_tricks)
             tricks_performed += 1
-            time.sleep(3.5 + random.randrange(minimum_trick_time, maximum_trick_time))
+            time.sleep(random.uniform(minimum_trick_time, maximum_trick_time))
